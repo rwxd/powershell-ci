@@ -1,4 +1,4 @@
-# powershell-analyzer
+# powershell-ci
 Script to analyze powershell code syntax.
 
 ## Manual execution
