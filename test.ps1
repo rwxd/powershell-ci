@@ -1,18 +1,57 @@
 #!/usr/bin/env pwsh
 
-function Start-Analyzing {
+<#
+.SYNOPSIS
+    Script to analyze a folder of powershell scripts recursively.
+.EXAMPLE
+    PS C:\> ./test.ps1
+.PARAMETER Path
+    Specifies the path of the target folder.
+    Standard is the current folder.
+.PARAMETER ExcludeAnalyzerRules
+    Array of Rules for the ScriptAnalyzer
+    Standard is @("PSUseApprovedVerbs")
+#>
+
+param ( 
+    $Path = $PSScriptRoot,
+    $ExcludeAnalyzerRules = @("PSUseApprovedVerbs")
+)
+
+function Analyze-Syntax {
+    <#
+    .SYNOPSIS
+    Function to start analyzing of a folder with powershell scripts recursively.
+    
+    .PARAMETER Path
+    Specifies the path of the folder to recursively analyze.
+    Standard is current script path
+    
+    .PARAMETER Severity
+    Specifies the servity.
+    Standard is Error & Warning
+    
+    .PARAMETER ExcludeRules
+    Specifies Rules to exclude.
+    
+    .EXAMPLE
+    Analyze-Syntax -Path $FolderPath -ExcludeRules $ExcludeAnalyzerRules
+    #>
     param(
-        [string]$Path = "$PSScriptRoot\",
-        [array]$Severity = @("Error", "Warning")
+        [string]$Path = "$PSScriptRoot",
+        [array]$Severity = @("Error", "Warning"),
+        [array]$ExcludeRules = @()
     )
 
-    $Result = Invoke-ScriptAnalyzer -Path $Path -Severity $Severity -Recurse
+    $Result = Invoke-ScriptAnalyzer -Path $Path -Severity $Severity -Recurse -ExcludeRule $ExcludeRules
 
     # if Invoke-ScriptAnalyzer finds something
     if ($Result) {
         $Result | Format-Table  
-        Write-Error -Message "$($Result.SuggestedCorrections.Count) linting errors or warnings were found. The build cannot continue."
-        EXIT 1     
+        if ($Result.SuggestedCorrections.Count -gt 0) {
+            Write-Error -Message "$($Result.SuggestedCorrections.Count) linting errors or warnings were found. The build cannot continue."
+        }
+        EXIT 1
     }
 }
 
@@ -35,7 +74,7 @@ function Install-Dependency {
 Install-Dependency -Name "PSScriptAnalyzer"
 Install-Dependency -Name "Pester"
 
-Start-Analyzing -Path "/home/fwrage/git/powershell-analyzer"
+Analyze-Syntax -Path $Path -ExcludeRules $ExcludeAnalyzerRules
 
 # $ScriptFromGithHub = Invoke-WebRequest https://raw.githubusercontent.com/tomarbuthnot/Run-PowerShell-Directly-From-GitHub/master/Run-FromGitHub-SamplePowerShell.ps1
 # Invoke-Expression $($ScriptFromGithHub.Content)
