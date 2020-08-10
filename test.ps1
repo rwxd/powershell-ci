@@ -1,4 +1,6 @@
-﻿﻿function Start-Analyzing {
+#!/usr/bin/env pwsh
+
+function Start-Analyzing {
     param(
         [string]$Path = "$PSScriptRoot\",
         [array]$Severity = @("Error", "Warning")
@@ -33,7 +35,7 @@ function Install-Dependency {
 Install-Dependency -Name "PSScriptAnalyzer"
 Install-Dependency -Name "Pester"
 
-Start-Analyzing -Path "/mnt/shared/git/private/powershell-analyzer/"
+Start-Analyzing -Path "/home/fwrage/git/powershell-analyzer"
 
 # $ScriptFromGithHub = Invoke-WebRequest https://raw.githubusercontent.com/tomarbuthnot/Run-PowerShell-Directly-From-GitHub/master/Run-FromGitHub-SamplePowerShell.ps1
 # Invoke-Expression $($ScriptFromGithHub.Content)
