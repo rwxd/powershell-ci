@@ -1,7 +1,10 @@
 # powershell-analyzer
+Script to analyze powershell code syntax.
 
-Execute with:
+## Manual execution
+Execute with
 ```powershell
-$ScriptFromGithHub = Invoke-WebRequest https://raw.githubusercontent.com/tomarbuthnot/Run-PowerShell-Directly-From-GitHub/master/Run-FromGitHub-SamplePowerShell.ps1
+$ScriptFromGithHub = Invoke-WebRequest https://raw.githubusercontent.com/ProfileID/powershell-ci/master/test.ps1
 Invoke-Expression $($ScriptFromGithHub.Content)
 ```
+

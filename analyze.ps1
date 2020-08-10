@@ -14,7 +14,7 @@
 #>
 
 param ( 
-    $Path = $PSScriptRoot,
+    $Path = "$PSScriptRoot",
     $ExcludeAnalyzerRules = @("PSUseApprovedVerbs")
 )
 
@@ -43,6 +43,7 @@ function Analyze-Syntax {
         [array]$ExcludeRules = @()
     )
 
+    Write-Host "Analyzing $Path recursively"
     $Result = Invoke-ScriptAnalyzer -Path $Path -Severity $Severity -Recurse -ExcludeRule $ExcludeRules
 
     # if Invoke-ScriptAnalyzer finds something
@@ -75,6 +76,3 @@ Install-Dependency -Name "PSScriptAnalyzer"
 Install-Dependency -Name "Pester"
 
 Analyze-Syntax -Path $Path -ExcludeRules $ExcludeAnalyzerRules
-
-# $ScriptFromGithHub = Invoke-WebRequest https://raw.githubusercontent.com/tomarbuthnot/Run-PowerShell-Directly-From-GitHub/master/Run-FromGitHub-SamplePowerShell.ps1
-# Invoke-Expression $($ScriptFromGithHub.Content)
