@@ -8,6 +8,11 @@ jobs:
         images: ["ubuntu-latest"]
     steps:
     - uses: actions/checkout@v2
-    - name: Install powershell
+    - name: Install powershell & set execute permissions
       run: |
         sudo apt install -y powershell
+        chmod 755 -R $GITHUB_WORKSPACE
+    - name: Run build.ps1
+      run: |
+        cd $GITHUB_WORKSPACE
+        ./build.ps1
