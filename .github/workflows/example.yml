@@ -18,4 +18,4 @@ jobs:
         sudo apt install -y powershell
     - name: Run build.ps1
       run: |
-        ./tmp/powershell-ci/build.ps1 -Path $GITHUB_WORKSPACE
+        pwsh /tmp/powershell-ci/build.ps1 -Path $GITHUB_WORKSPACE
