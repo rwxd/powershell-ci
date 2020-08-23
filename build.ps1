@@ -122,5 +122,5 @@ function Install-Dependency {
 Install-Dependency -Name "PSScriptAnalyzer"
 Install-Dependency -Name "Pester"
 
-Start-Linting -Path $path -exclude_rules $exclude_analyzer_rules
-Start-Tests -Path $path
+Run-Linting -Path $path -exclude_rules $exclude_analyzer_rules
+Run-Tests -Path $path
