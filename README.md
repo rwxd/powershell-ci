@@ -1,10 +1,6 @@
 # powershell-ci
-Script to analyze powershell code syntax.
+![tests](https://github.com/ProfileID/powershell-ci/workflows/tests/badge.svg)
 
-## Manual execution
-Execute with
-```powershell
-$ScriptFromGithHub = Invoke-WebRequest https://raw.githubusercontent.com/ProfileID/powershell-ci/master/test.ps1
-Invoke-Expression $($ScriptFromGithHub.Content)
-```
+# About PowerShell-CI
+Script to analyze PowerShell code syntax.
 

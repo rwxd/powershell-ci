@@ -8,7 +8,7 @@ jobs:
         images: ["ubuntu-latest"]
     steps:
     - uses: actions/checkout@v2
-    - name: Clone Powershell analyze repository
+    - name: Clone CI repository
       run: |
         sudo apt install -y git
         git clone https://github.com/ProfileID/powershell-ci /tmp/powershell-ci
@@ -16,6 +16,6 @@ jobs:
     - name: Install Powershell
       run: |
         sudo apt install -y powershell
-    - name: Run analyze
+    - name: Run build.ps1
       run: |
         ./tmp/powershell-ci/build.ps1 -path $GITHUB_WORKSPACE
