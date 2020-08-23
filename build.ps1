@@ -43,7 +43,7 @@ function Start-Linting {
         [array]$exclude_rules = @()
     )
 
-    Write-Host "Analyzing $path recursively"
+    Write-Output -InputObject "Analyzing $path recursively"
     $Result = Invoke-ScriptAnalyzer -Path $path -Severity $severity -Recurse -ExcludeRule $exclude_rules
 
     # if Invoke-ScriptAnalyzer finds something
