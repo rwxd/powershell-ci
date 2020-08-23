@@ -2,7 +2,7 @@
 ![tests](https://github.com/ProfileID/powershell-ci/workflows/tests/badge.svg)
 
 ## About PowerShell-CI
-Script to lint PowerShell code and run [Pester](https://pester.dev/docs/quick-start) tests. 
+Script to lint PowerShell code with [PSSCriptAnalyzer](https://github.com/PowerShell/PSScriptAnalyzer) and run [Pester](https://pester.dev/docs/quick-start) tests. 
 
 ## Usage
 Run on current folder.
