@@ -18,4 +18,4 @@ jobs:
         sudo apt install -y powershell
     - name: Run analyze
       run: |
-        ./tmp/powershell-ci/analyze.ps1 -path $GITHUB_WORKSPACE
+        ./tmp/powershell-ci/build.ps1 -path $GITHUB_WORKSPACE
