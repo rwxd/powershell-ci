@@ -7,16 +7,22 @@
     PS C:\> ./build.ps1
 .PARAMETER Path
     Specifies the path of the target folder.
-    Standard is the current folder.
-.PARAMETER exclude_analyzer_rules
-    Array of Rules for the ScriptAnalyzer
-    Standard is @("PSUseApprovedVerbs")
-#>
+    Default is the current folder.
+.PARAMETER ExcludeAnalyzerRules
+    Array of Rules for the ScriptAnalyzer.
+    Default is @("PSUseApprovedVerbs").
+.PARAMETER Linting
+    Option to use linting with PSScriptAnalyzer.
+    Default is true.
+.PARAMETER Pester
+    Option to use pester tests.
+    Default is false.
+    #>
 
 param ( 
     $Path = "$PSScriptRoot",
-    $Exclude_Analyzer_Rules = @("PSUseApprovedVerbs"),
-    $Lint = $true,
+    $ExcludeAnalyzerRules = @("PSUseApprovedVerbs"),
+    $Linting = $true,
     $Pester = $false
 )
 
@@ -27,17 +33,17 @@ function Run-Linting {
     
     .PARAMETER path
     Specifies the path of the folder to recursively analyze.
-    Standard is current script path
+    Default is current script path
     
     .PARAMETER severity
     Specifies the servity.
-    Standard is Error & Warning
+    Default is Error & Warning.
     
     .PARAMETER exclude_rules
     Specifies Rules to exclude.
     
     .EXAMPLE
-    Analyze-Syntax -Path $FolderPath -exclude_rules $exclude_analyzer_rules
+    Analyze-Syntax -Path $FolderPath -exclude_rules $ExcludeAnalyzerRules.
     #>
     param(
         [string]$path = "$PSScriptRoot",
@@ -61,11 +67,11 @@ function Run-Linting {
 function Run-Tests {
     <#
     .SYNOPSIS
-    Function to run Pester Tests in a folder
+    Function to run Pester Tests in a folder.
     
     .PARAMETER path
     Specifies the path of the folder to recursively analyze.
-    Standard is current script path
+    Default is current script path.
     
     .EXAMPLE
     Start-Tests
@@ -94,10 +100,10 @@ function Run-Tests {
 function Install-Dependency {
     <#
     .SYNOPSIS
-    Function to install Dependencys
+    Function to install Dependencys.
     
     .PARAMETER name
-    Name of the Powershell Module in the PSGallery
+    Name of the Powershell Module in the PSGallery.
     
     .EXAMPLE
     Install-Dependency -Name "PSScriptAnalyzer"
@@ -121,12 +127,12 @@ function Install-Dependency {
     }
 }
 
-Install-Dependency -Name "PSScriptAnalyzer"
-Install-Dependency -Name "Pester"
 
-if ($lint) {
-    Run-Linting -Path $path -exclude_rules $exclude_analyzer_rules
+if ($Linting) {
+    Install-Dependency -Name "PSScriptAnalyzer"
+    Run-Linting -Path $path -exclude_rules $ExcludeAnalyzerRules
 }
-if ($pester) {
+if ($Pester) {
+    Install-Dependency -Name "Pester"
     Run-Tests -Path $path
 }
