@@ -14,8 +14,10 @@
 #>
 
 param ( 
-    $path = "$PSScriptRoot",
-    $exclude_analyzer_rules = @("PSUseApprovedVerbs")
+    $Path = "$PSScriptRoot",
+    $Exclude_Analyzer_Rules = @("PSUseApprovedVerbs"),
+    $Lint = $true,
+    $Pester = $false
 )
 
 function Run-Linting {
@@ -74,7 +76,7 @@ function Run-Tests {
         [string]$path = "$$PSScriptRoot"
     )
 
-    $result = Invoke-Pester -Path $path -CodeCoverage $path\*\*\*\*.ps1 -PassThru
+    $result = Invoke-Pester -Path $path -PassThru -Quiet
 
     # if errors in result
     if ($Result.FailedCount -gt 0) {
@@ -122,5 +124,9 @@ function Install-Dependency {
 Install-Dependency -Name "PSScriptAnalyzer"
 Install-Dependency -Name "Pester"
 
-Run-Linting -Path $path -exclude_rules $exclude_analyzer_rules
-Run-Tests -Path $path
+if ($lint) {
+    Run-Linting -Path $path -exclude_rules $exclude_analyzer_rules
+}
+if ($pester) {
+    Run-Tests -Path $path
+}
