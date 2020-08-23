@@ -18,7 +18,7 @@ param (
     $exclude_analyzer_rules = @("PSUseApprovedVerbs")
 )
 
-function Start-Linting {
+function Run-Linting {
     <#
     .SYNOPSIS
     Function to start analyzing of a folder with powershell scripts recursively.
@@ -56,7 +56,7 @@ function Start-Linting {
     }
 }
 
-function Start-Tests {
+function Run-Tests {
     <#
     .SYNOPSIS
     Function to run Pester Tests in a folder
