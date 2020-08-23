@@ -1,4 +1,4 @@
-name: example
+name: Example Workflow
 on: [push]
 jobs:
   build:
@@ -8,14 +8,11 @@ jobs:
         images: ["ubuntu-latest"]
     steps:
     - uses: actions/checkout@v2
+    - name: Install PowerShell & Git
+      run: sudo apt install -y git powershell
     - name: Clone CI repository
       run: |
-        sudo apt install -y git
         git clone https://github.com/ProfileID/powershell-ci /tmp/powershell-ci
         chmod 755 -R /tmp/powershell-ci
-    - name: Install Powershell
-      run: |
-        sudo apt install -y powershell
     - name: Run build.ps1
-      run: |
-        pwsh /tmp/powershell-ci/build.ps1 -Path $GITHUB_WORKSPACE
+      run: pwsh /tmp/powershell-ci/build.ps1 -Path $GITHUB_WORKSPACE
