@@ -20,6 +20,11 @@ Run with Pester Tests.
 pwsh ./check.ps1 -Pester
 ```
 
+Custom severity
+```bash
+pwsh ./check.ps1 -severity @("Error")
+```
+
 Exclude Analyzer Rules
 ```bash
 pwsh ./check.ps1 -ExcludeAnalyzerRules @("PSUseApprovedVerbs")
