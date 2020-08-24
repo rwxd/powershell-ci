@@ -22,7 +22,7 @@ pwsh ./check.ps1 -Pester
 
 Custom severity
 ```bash
-pwsh ./check.ps1 -severity @("Error")
+pwsh ./check.ps1 -Severity @("Error")
 ```
 
 Exclude Analyzer Rules
