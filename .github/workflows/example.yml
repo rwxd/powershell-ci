@@ -14,5 +14,5 @@ jobs:
       run: |
         git clone https://github.com/ProfileID/powershell-ci /tmp/powershell-ci
         chmod 755 -R /tmp/powershell-ci
-    - name: Run build.ps1
-      run: pwsh /tmp/powershell-ci/build.ps1 -Path $GITHUB_WORKSPACE
+    - name: Run check.ps1
+      run: pwsh /tmp/powershell-ci/check.ps1 -Path $GITHUB_WORKSPACE

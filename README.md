@@ -7,22 +7,22 @@ Script to lint PowerShell code with [PSScriptAnalyzer](https://github.com/PowerS
 ## Usage
 Run on current folder.
 ```bash
-pwsh ./build.ps1
+pwsh ./check.ps1
 ```
 
 Run on different folder.
 ```bash
-pwsh ./build.ps1 -Path /tmp/script_folder/
+pwsh ./check.ps1 -Path /tmp/script_folder/
 ```
 
 Run with Pester Tests.
 ```bash
-pwsh ./build.ps1 -Pester
+pwsh ./check.ps1 -Pester
 ```
 
 Exclude Analyzer Rules
 ```bash
-pwsh ./build.ps1 -ExcludeAnalyzerRules @("PSUseApprovedVerbs")
+pwsh ./check.ps1 -ExcludeAnalyzerRules @("PSUseApprovedVerbs")
 ```
 
 ## Example Github Actions Workflow
@@ -43,6 +43,6 @@ jobs:
       run: |
         git clone https://github.com/ProfileID/powershell-ci /tmp/powershell-ci
         chmod 755 -R /tmp/powershell-ci
-    - name: Run build.ps1
-      run: pwsh /tmp/powershell-ci/build.ps1 -Path $GITHUB_WORKSPACE
+    - name: Run check.ps1
+      run: pwsh /tmp/powershell-ci/check.ps1 -Path $GITHUB_WORKSPACE
 ```

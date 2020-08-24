@@ -12,7 +12,7 @@ jobs:
       run: |
         sudo apt install -y powershell
         chmod 755 -R $GITHUB_WORKSPACE
-    - name: Run build.ps1
+    - name: Run check.ps1
       run: |
         cd $GITHUB_WORKSPACE
-        ./build.ps1
+        ./check.ps1
